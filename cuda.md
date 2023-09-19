@@ -6,7 +6,7 @@ CUDA stands for Compute Unified Device Architecture. It is a platform to perform
 
 > CUDA comprises two APIs - the [CUDA driver API](https://docs.nvidia.com/cuda/cuda-driver-api/index.html) and the [CUDA runtime API](https://docs.nvidia.com/cuda/cuda-runtime-api/index.html). The runtime API allows applications to plug into the CUDA platform and use GPU computing features in their programs. 
 
- * On Vultr Cloud GPU servers, the instance creation process installs the NVIDIA GPU drivers and the driver API
+ * On most Cloud GPU servers, the instance creation process installs the NVIDIA GPU drivers and the driver API
  * The CUDA Toolkit installs the CUDA runtime API. Application programmers use the runtime API to take advantage of the GPU for parallel computations.
 
 This guide explains how to install the CUDA Toolkit on a Ubuntu 22.04 server. 
@@ -15,12 +15,12 @@ This guide explains how to install the CUDA Toolkit on a Ubuntu 22.04 server.
 
 To follow this guide and install the CUDA Toolkit, you need to:
 
- * [Generate SSH keys](https://www.vultr.com/docs/how-do-i-generate-ssh-keys/) and [add the keys to your account](https://www.vultr.com/docs/deploy-a-new-server-with-an-ssh-key/#Add_an_SSH_key_to_your_Vultr_Account), if you haven't already done so
- * Deploy a Vultr instance running Ubuntu 22.04 LTS   
- * [connect to the server over SSH](https://www.vultr.com/docs/connect-to-a-server-using-an-ssh-key/). 
+ * Generate SSH keys 
+ * Deploy a cloud GPU instance running Ubuntu 22.04 LTS   
+ * Connect to the server over SSH
 
- * [Create a new user with sudo rights](https://www.vultr.com/docs/how-to-use-sudo-on-a-vultr-cloud-server/#Create_a_Sudo_User_on_Debian___Ubuntu). 
- * [Log into the server over SSH as the non-root user](https://www.vultr.com/docs/using-your-ssh-key-to-login-to-non-root-users/)
+ * Create a new user with sudo rights. 
+ * Log into the server over SSH as the non-root user
  * This guide assumes you log in as the user `pythonuser`.
 
 ### Installation Methods
@@ -80,7 +80,7 @@ The installer presents an interactive interface to choose the installation optio
  * The installer shows the End User License Agreement (EULA). Use the `Up` and `Down` arrow keys to browse through the EULA. To accept the agreement, type `accept` at the prompt and press `Enter`.
  * It shows the installation options. The top-level options are `Driver`, `CUDA Toolkit 12.0`,  `CUDA Demo Suite 12.0`,   `CUDA Documentation 12.0`, and `Kernel Objects`.
  * Use the `Up` and `Down` arrow keys to navigate through these options. Use the `Left` and `Right` arrow keys to expand and collapse the nested options. Press the `Enter` key to select or unselect an option. The selected options are marked with an `X` at the left. 
- * **Unselect the driver**. Vultr Cloud GPU servers already have the drivers pre-installed.
+ * **Unselect the driver**. Most Cloud GPU servers already have the drivers pre-installed.
  * Select CUDA Toolkit. Optionally, if you are developing new programs, also select CUDA Demo Suite and CUDA Documentation. 
  * After selecting the software to be installed, navigate down to the line that reads `Install`
  * Press `Enter` to start the installation.
@@ -96,7 +96,7 @@ This is explained in the next section. The report also presents a warning that i
     ***WARNING: Incomplete installation! This installation did not install the CUDA Driver. 
     A driver of version at least 525.00 is required for CUDA 12.0 functionality to work.
 
-This is expected, as you explicitly unselected the option to install the driver. Because Vultr Cloud GPU servers come pre-installed with the right drivers.
+This is expected, as you explicitly unselected the option to install the driver. Because most Cloud GPU servers come pre-installed with the right drivers.
 
 To configure your system to work with the new software, update the environment variables to include the newly added libraries. To learn how to do this, go to the section *Configure the System*.
 
@@ -237,7 +237,7 @@ The version of the CUDA Toolkit that you can install depends on the configuratio
  * CUDA Driver API Version `12.0`
  * Linux kernel version `5.15.0-75`
 
-Based on the above system configuration, the installation examples show how to install CUDA Toolkit version `12.0.1`. As of September 2023, this is the latest CUDA Toolkit version that you can install on Vultr servers running Ubuntu 22.04 LTS.
+Based on the above system configuration, the installation examples show how to install CUDA Toolkit version `12.0.1`. 
 
 Before installing an arbitrary version of the CUDA Toolkit, check if the system can run the software. The following sections show how to do this.
 
@@ -272,7 +272,7 @@ To check if the system has the right NVIDIA GPU drivers, test if it can access t
 
     $ nvidia-smi
 
-`nvidia-smi` shows the details of the GPU. NVIDIA SMI is NVIDIA's System Management Interface. The GPU driver installer installs NVIDIA-SMI during system initialization. Vultr Cloud GPU servers come pre-installed with the right drivers. 
+`nvidia-smi` shows the details of the GPU. NVIDIA SMI is NVIDIA's System Management Interface. The GPU driver installer installs NVIDIA-SMI during system initialization. Most Cloud GPU servers come pre-installed with the right drivers. 
 
     +-----------------------------------------------------------------------------+
     | NVIDIA-SMI 525.125.06   Driver Version: 525.125.06   CUDA Version: 12.0     |
@@ -342,7 +342,7 @@ If the right version of the headers is not installed, install it:
 
 ### Choose the right version
 
-To decide which version of the CUDA Toolkit to install on Vultr Cloud GPU servers, consider the following:
+To decide which version of the CUDA Toolkit to install on your Cloud GPU server, consider the following:
 
  * The CUDA Toolkit version that the NVIDIA Graphics Drivers support
  * The CUDA Toolkit version that the kernel supports
